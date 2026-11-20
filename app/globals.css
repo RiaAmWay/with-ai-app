@@ -1,0 +1,86 @@
+@import "tailwindcss";
+
+:root {
+  --memo-base: 16px;
+  --background: #fff5f8;
+  --foreground: #4a2c3a;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-zen-maru), "Hiragino Maru Gothic ProN", "Meiryo", sans-serif;
+}
+
+body {
+  background:
+    radial-gradient(circle at 10% 0%, #ffe1ec 0, transparent 40%),
+    radial-gradient(circle at 100% 100%, #ffd6e6 0, transparent 45%),
+    var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+}
+
+/* ---------- エディタ ---------- */
+.memo-editor {
+  font-size: var(--memo-base);
+  line-height: 1.9;
+  outline: none;
+  white-space: pre-wrap;
+  word-break: break-word;
+}
+
+.memo-editor:empty::before {
+  content: attr(data-placeholder);
+  color: #e3a3bb;
+  pointer-events: none;
+}
+
+.memo-editor.lined {
+  background-image: repeating-linear-gradient(
+    to bottom,
+    transparent 0,
+    transparent calc(1.9em - 1px),
+    #ffd3e2 calc(1.9em - 1px),
+    #ffd3e2 1.9em
+  );
+  background-attachment: local;
+}
+
+.memo-editor b,
+.memo-editor strong {
+  color: #c2185b;
+}
+
+/* ---------- 文字サイズ ---------- */
+.fs-s  { font-size: calc(var(--memo-base) * 0.8); }
+.fs-m  { font-size: calc(var(--memo-base) * 1); }
+.fs-l  { font-size: calc(var(--memo-base) * 1.35); }
+.fs-xl { font-size: calc(var(--memo-base) * 1.8); font-weight: 700; }
+
+/* ---------- マーカー ---------- */
+.mk { --mk: #fff176; border-radius: 3px; padding: 0 1px; }
+.mk-yellow { --mk: #fff17a; }
+.mk-pink   { --mk: #ffb3cf; }
+.mk-green  { --mk: #b9f2c8; }
+.mk-blue   { --mk: #b5e3ff; }
+.mk-purple { --mk: #dcc7ff; }
+
+.mk-full { background: var(--mk); }
+.mk-half { background: linear-gradient(transparent 58%, var(--mk) 58%); }
+.mk-none { background: none !important; }
+
+/* 暗記モード：マーカー部分を隠す */
+.hide-marks .mk:not(.mk-none) {
+  color: transparent;
+  background: #f48fb1 !important;
+  cursor: pointer;
+  transition: color 0.2s;
+}
+.hide-marks .mk:not(.mk-none):hover {
+  color: inherit;
+  background: var(--mk) !important;
+}
+
+/* ---------- スクロールバー ---------- */
+* { scrollbar-color: #f8bbd0 transparent; scrollbar-width: thin; }
